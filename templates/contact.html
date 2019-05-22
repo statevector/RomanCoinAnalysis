@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Skeleton application demoing Heroku and Flask integration.">
+<meta name="author" content="@gotoariel">
+<!-- <link rel="icon" href="favicon.ico"> -->
+
+<title>Contact</title>
+
+<!-- Bootstrap core CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<style>
+/* Remove the navbar's default margin-bottom and rounded borders */ 
+.navbar {
+margin-bottom: 0;
+border-radius: 0;
+}
+
+/* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+.row.content {height: 450px}
+
+/* Set gray background color and 100% height */
+.sidenav {
+padding-top: 20px;
+background-color: #f1f1f1;
+height: 100%;
+}
+
+/* Set black background color, white text and some padding */
+footer {
+background-color: #555;
+color: white;
+padding: 15px;
+}
+
+/* On small screens, set height to 'auto' for sidenav and grid */
+@media screen and (max-width: 767px) {
+.sidenav {
+height: auto;
+padding: 15px;
+}
+.row.content {height:auto;} 
+}
+</style>
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-inverse">
+<div class="container-fluid">
+<div class="navbar-header">
+<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>                        
+</button>
+<a class="navbar-brand" href="/">Roman Coin Analysis</a>
+</div>
+<div class="collapse navbar-collapse" id="myNavbar">
+<ul class="nav navbar-nav">
+<li class="active"><a href="/">Home</a></li>
+<li><a href="/analysis">Analyze a Coin</a></li>
+<li><a href="/about">How it Works</a></li>
+<li><a href="/contact">Contact</a></li>
+<li><a href="https://github.com/statevector/RomanCoinAnalysis" target="_blank">Source</a></li>
+</ul>
+<ul class="nav navbar-nav navbar-right">
+<li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+</ul>
+</div>
+</div>
+</nav>
+
+<div class="container-fluid">
+<div class="row">
+<div class="col-md-8"> 
+<h3> About Me </h3>
+<img src="/static/headshot/headshot.jpg" align="left" style="padding-right: 10px; max-width: 225px; max-height: 225px; width: auto; height: auto;">
+<p>Hello! My name is Christopher Willis. I'm a fellow at The Data Incubator and a recent graduate of Michigan State University, where I obtained my Ph.D. in Physics.</p>
+<p>My research focused on performing searches for <a href="https://en.wikipedia.org/wiki/W%E2%80%B2_and_Z%E2%80%B2_bosons">new elementary particles</a> in the massive proton-proton collision datasets collected at the <a href="https://en.wikipedia.org/wiki/Large_Hadron_Collider">LHC</a> at <a href="https://en.wikipedia.org/wiki/CERN">CERN</a> in Geneva, Switzerland, where I lived for just under two years.</p>
+<p>I'm fascinated by the process of deriving insights from data, and with more than six years of research experience, I'm excited to take what I've learned as a Physicist and apply it to solving impactful, real world problems in Data Science.</p>
+<p>I was inspired to create this project because of my interest in Roman history. My dad introduced me to ancient coin collecting at a young age, and I wanted to create a tool that makes this activity more accessible.</p>
+<p>Besides coin collecting, in my free time I like to travel, try new foods, and play racquetball.</p>
+</div>
+</div>
+</div>
+
+<div class="container-fluid">    
+<div class="row">
+<div class="col-md-12"> 
+<h3> Contact Information </h3>
+<p>Phone: (703) 869-7463 </p>
+<p>Email: <a href="mailto: christopher.willis@gmail.com">christopher.willis@gmail.com</a></p>
+<!-- <p>Name: Christopher Willis</p> -->
+<!-- <p>Email: <a href="mailto: christopher.willis@mg.thedataincubator.com">christopher.willis@mg.thedataincubator.com</a></p> -->
+</div>
+</div>
+</div>
+
+<footer class="container-fluid text-center">
+</footer>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

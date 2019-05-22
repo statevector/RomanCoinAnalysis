@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Skeleton application demoing Heroku and Flask integration.">
+<meta name="author" content="@gotoariel">
+<!-- <link rel="icon" href="favicon.ico"> -->
+
+<title>Results</title>
+
+<!-- Bootstrap core CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+<!-- Bokeh -->
+<link rel="stylesheet" href="https://cdn.pydata.org/bokeh/release/bokeh-1.0.4.min.css" type="text/css" />
+<link rel="stylesheet" href="https://cdn.pydata.org/bokeh/release/bokeh-widgets-1.0.4.min.css" type="text/css" />
+
+<style>
+/* Remove the navbar's default margin-bottom and rounded borders */ 
+.navbar {
+margin-bottom: 0;
+border-radius: 0;
+}
+
+/* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+.row.content {height: 450px}
+
+/* Set gray background color and 100% height */
+.sidenav {
+padding-top: 20px;
+background-color: #f1f1f1;
+height: 100%;
+}
+
+/* Set black background color, white text and some padding */
+footer {
+background-color: #555;
+color: white;
+padding: 15px;
+}
+
+/* On small screens, set height to 'auto' for sidenav and grid */
+@media screen and (max-width: 767px) {
+.sidenav {
+height: auto;
+padding: 15px;
+}
+.row.content {height:auto;} 
+}
+</style>
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-inverse" role="navigation">
+<div class="container-fluid">
+<div class="navbar-header">
+<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>                        
+</button>
+<a class="navbar-brand" href="/">Roman Coin Analysis</a>
+</div>
+<div class="collapse navbar-collapse" id="myNavbar">
+<ul class="nav navbar-nav">
+<li class="active"><a href="/">Home</a></li>
+<li><a href="/analysis">Analyze a Coin</a></li>
+<li><a href="/about">How it Works</a></li>
+<li><a href="/contact">Contact</a></li>
+<li><a href="https://github.com/statevector/RomanCoinAnalysis" target="_blank">Source</a></li>
+</ul>
+<ul class="nav navbar-nav navbar-right">
+<li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+</ul>
+</div>
+</div>
+</nav>
+
+<div class="container-fluid">
+<h2>Results</h2>
+
+{% if probs.0>=75 %}
+<div class="alert alert-success alert-dismissible fade in">
+<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+<strong>Success!</strong> The portrait on this coin is identified with Emperor <b>{{emperors.0}}</b> at {{probs.0|round}}% confidence (relative to the currently implemented classes).
+</div>
+{% else %}
+<div class="alert alert-warning alert-dismissible fade in">
+<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+<strong>Warning!</strong> We weren't too sure about the portrait on this coin, but our best guess is that it belongs to Emperor <b>{{emperors.0}}</b> at {{probs.0|round}}% confidence (relative to the currently implemented classes).
+</div>
+{% endif %}
+
+<div class="alert alert-info alert-dismissible fade in">
+<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+<p>The <b>top three</b> portrait estimates include:</p>
+<ul type = "circle">
+{% for r in results %}
+    <li>{{ r.0|e }} : {{ r.1|round }}%</li>
+{% endfor %}
+</ul>
+</div>
+
+<p> A graph of sale prices of coins issued by Emperor {{emperors.0}} from recent online auctions is presented as well. It's possible to interact with data: try using the toolbar on right-hand side to click, drag, and zoom!</p>
+<div class="row">
+<div class="col-md-4">
+<div class="thumbnail">
+<img src="{{filename}}" alt="{{emperors.0}}" style="width: 100%; height: 100%; object-fit: contain;"> 
+<div class="caption">
+<p>The image of the uploaded coin.</p>
+</div>
+</div>
+</div>
+<div class="col-md-8">
+<div class="container-fluid"> <!-- test -->
+{{ div | safe }} 
+</div>
+</div>
+</div>
+</div>
+<div class="container-fluid">
+<h2>Additional Resources</h2>
+<p>The following websites contain additional infromation on Emperor {{emperors.0}}:</p>
+<div class="row">
+<div class="col-md-12">
+<ul type = "circle">
+<li><a href="https://en.wikipedia.org/wiki/{{emperors.0}}">Wikipedia</a></li>
+<li><a href="https://www.forumancientcoins.com/numiswiki/view.asp?key={{emperors.0}}">Forum Ancient Coins</a></li>
+<li><a href="http://numismatics.org/ocre/">OCRE</li>
+<li><a href="http://www.wildwinds.com/coins/ric/"/>Wildwinds</li>
+</ul>
+</div>
+</div>
+</div>
+
+<footer class="container-fluid text-center">
+</footer>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+<!-- Bokeh
+=========== -->
+<script type="text/javascript" src="https://cdn.pydata.org/bokeh/release/bokeh-1.0.4.min.js"></script>
+<script type="text/javascript" src="https://cdn.pydata.org/bokeh/release/bokeh-widgets-1.0.4.min.js"></script>
+{{ script | safe }}
+
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Skeleton application demoing Heroku and Flask integration.">
+<meta name="author" content="@gotoariel">
+<!-- <link rel="icon" href="favicon.ico"> -->
+
+<title>Homepage</title>
+
+<!-- 
+how to do this correctly?
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" type="text/css">
+<link rel="stylesheet" href="static/css/main.css" type="text/css"> -->
+
+<!-- Bootstrap core CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+<style>
+/* Remove the navbar's default margin-bottom and rounded borders */ 
+.navbar {
+margin-bottom: 0;
+border-radius: 0;
+}
+
+/* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+.row.content {height: 450px}
+
+/* Set gray background color and 100% height */
+.sidenav {
+padding-top: 20px;
+background-color: #f1f1f1;
+height: 100%;
+}
+
+/* Set black background color, white text and some padding */
+footer {
+background-color: #555;
+color: white;
+padding: 15px;
+}
+
+/* On small screens, set height to 'auto' for sidenav and grid */
+@media screen and (max-width: 767px) {
+.sidenav {
+height: auto;
+padding: 15px;
+}
+.row.content {height:auto;} 
+}
+</style>
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-inverse">
+<div class="container-fluid">
+<div class="navbar-header">
+<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>                        
+</button>
+<a class="navbar-brand" href="/">Roman Coin Analysis</a>
+</div>
+<div class="collapse navbar-collapse" id="myNavbar">
+<ul class="nav navbar-nav">
+<li class="active"><a href="/">Home</a></li>
+<li><a href="/analysis">Analyze a Coin</a></li>
+<li><a href="/about">How it Works</a></li>
+<li><a href="/contact">Contact</a></li>
+<li><a href="https://github.com/statevector/RomanCoinAnalysis" target="_blank">Source</a></li>
+</ul>
+<ul class="nav navbar-nav navbar-right">
+<li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+</ul>
+</div>
+</div>
+<img src="static/frontpage/20160901094323-1920.jpg" style="width:100%">
+</nav>
+
+<!--
+<div class="container-fluid">
+<div class="row">
+<div class="col-md-12"> 
+<h1>Analyze a Coin</h1>
+<p>This web application can be used to aid in the identification of ancient Imperial Roman coins.</p>
+<p>Paragraph 2.</p>
+<p>Paragraph 3.</p>
+<p>How it works, etc.</p>
+</div>
+</div>
+</div>
+-->
+
+<footer class="container-fluid text-center">
+</footer>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+</body>
+</html>
+
+
+

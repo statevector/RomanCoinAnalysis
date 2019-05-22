@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Skeleton application demoing Heroku and Flask integration.">
+<meta name="author" content="@gotoariel">
+<!-- <link rel="icon" href="favicon.ico"> -->
+
+<title>About</title>
+
+<!-- Bootstrap core CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<style>
+/* Remove the navbar's default margin-bottom and rounded borders */ 
+.navbar {
+margin-bottom: 0;
+border-radius: 0;
+}
+
+/* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+.row.content {height: 450px}
+
+/* Set gray background color and 100% height */
+.sidenav {
+padding-top: 20px;
+background-color: #f1f1f1;
+height: 100%;
+}
+
+/* Set black background color, white text and some padding */
+footer {
+background-color: #555;
+color: white;
+padding: 15px;
+}
+
+/* On small screens, set height to 'auto' for sidenav and grid */
+@media screen and (max-width: 767px) {
+.sidenav {
+height: auto;
+padding: 15px;
+}
+.row.content {height:auto;} 
+}
+</style>
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-inverse">
+<div class="container-fluid">
+<div class="navbar-header">
+<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>                        
+</button>
+<a class="navbar-brand" href="/">Roman Coin Analysis</a>
+</div>
+<div class="collapse navbar-collapse" id="myNavbar">
+<ul class="nav navbar-nav">
+<li class="active"><a href="/">Home</a></li>
+<li><a href="/analysis">Analyze a Coin</a></li>
+<li><a href="/about">How it Works</a></li>
+<li><a href="/contact">Contact</a></li>
+<li><a href="https://github.com/statevector/RomanCoinAnalysis" target="_blank">Source</a></li>
+</ul>
+<ul class="nav navbar-nav navbar-right">
+<li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+</ul>
+</div>
+</div>
+</nav>
+
+<div class="container-fluid">    
+<div class="row">
+<div class="col-md-12">
+<h3>What is this?</h3>
+<p>This web application is designed to help users identify and assess the value of ancient Roman coins. Users can link to or upload an image of a Roman coin, and a machine learning model will process the image and predict which emperor appears on the coin based on the distinct features of the obverse (frontside) portrait.
+In addition, users are provided with an interactive visualization comprised of past coin auction data that provides a way to assess the value of coins specific to a particular emperor, based on denomination, grade, and other features. The idea is to provide everyone from new collectors to enthusiasts with information to help them learn more about ancient coins and better assess their value. The app is developed with Python in Flask and deployed on Heroku.</p>
+<h3>Machine Learning Model</h3>
+<p>The portrait identification model is implemented as a 3-layer <a href="https://en.wikipedia.org/wiki/Convolutional_neural_network">Convolutional Neural Network</a> (CNN) using the Keras framework. The model is trained with over 8,200 images of imperial Roman coins, corresponding to 9 different Roman emperors, which were downloaded from several online coin auction websites using the Requests and Beautiful Soup packages. The dataset consists of roughly between 600 to 1200 images per emperor, and the images are standardized for analysis (rescaled and converted to grayscale) using OpenCV. Image augmentation is performed using the Keras API to artificially boost the dataset for model training, and the overall accuracy is approximately 95% on out-of-sample test data.</p>
+<h3>Data Visualization</h3>
+<p>Along with coin images, coin auction lot descriptions are scraped as well, and relevant keywords are extracted to form a database. Each coin in the database is identified by several features, such as the auction in which it was listed, the auction lot number, which portrait appears on the obverse, the denomination, the price realized, its grade, and whether or not it's toned, centered, etc. The Bokeh plotting package is used to construct an interactive visualization of this data in the form of a scatter plot of sale prices realized. The user can apply different selection criteria to see how the sale prices evolve, providing an estimate of value.</p>
+<h3>Future Plans</h3>
+In addition to portrait identification, I'd like to extend this app to extract the inscriptions appearing around the perimeter of the coin, which together with the portrait would allow for a complete identification via the <a href="https://en.wikipedia.org/wiki/Roman_Imperial_Coinage">RIC</a> number.
+</div>
+</div>
+</div>
+
+<footer class="container-fluid text-center">
+</footer>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

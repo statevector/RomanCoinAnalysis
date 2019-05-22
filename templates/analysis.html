@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Skeleton application demoing Heroku and Flask integration.">
+<meta name="author" content="@gotoariel">
+<!-- <link rel="icon" href="favicon.ico"> -->
+
+<title>Analysis</title>
+
+<!-- Bootstrap core CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+<!-- Bokeh -->
+<link rel="stylesheet" href="https://cdn.pydata.org/bokeh/release/bokeh-1.0.4.min.css" type="text/css" />
+<link rel="stylesheet" href="https://cdn.pydata.org/bokeh/release/bokeh-widgets-1.0.4.min.css" type="text/css" />
+
+<style>
+/* Remove the navbar's default margin-bottom and rounded borders */ 
+.navbar {
+margin-bottom: 0;
+border-radius: 0;
+}
+
+/* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+.row.content {height: 450px}
+
+/* Set gray background color and 100% height */
+.sidenav {
+padding-top: 20px;
+background-color: #f1f1f1;
+height: 100%;
+}
+
+/* Set black background color, white text and some padding */
+footer {
+background-color: #555;
+color: white;
+padding: 15px;
+}
+
+/* On small screens, set height to 'auto' for sidenav and grid */
+@media screen and (max-width: 767px) {
+.sidenav {
+height: auto;
+padding: 15px;
+}
+.row.content {height:auto;} 
+}
+</style>
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-inverse" role="navigation">
+<div class="container-fluid">
+<div class="navbar-header">
+<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>                        
+</button>
+<a class="navbar-brand" href="/">Roman Coin Analysis</a>
+</div>
+<div class="collapse navbar-collapse" id="myNavbar">
+<ul class="nav navbar-nav">
+<li class="active"><a href="/">Home</a></li>
+<li><a href="/analysis">Analyze a Coin</a></li>
+<li><a href="/about">How it Works</a></li>
+<li><a href="/contact">Contact</a></li>
+<li><a href="https://github.com/statevector/RomanCoinAnalysis" target="_blank">Source</a></li>
+</ul>
+<ul class="nav navbar-nav navbar-right">
+<li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+</ul>
+</div>
+</div>
+</nav>
+
+<div class="container-fluid">
+<div class="row">
+<div class="col-md-12"> 
+<h2>Analyze a Coin</h2>
+<p>This interface can be used to identify the portrait of the emperor on several ancient Imperial Roman coins. </p>
+
+<h3>Image URL</h3>
+<p>Link to an image to analyze it.</p>
+<form id="upload-url" action="/results" method="post" enctype="text/plain ">
+<input type="text" name="url" value="https://upload.wikimedia.org/wikipedia/commons/b/b7/TRAJAN_RIC_II_255_-_859421.jpg"> <br>
+<button type="submit" name="Submit" value='Submit'>Submit</button> 
+<button type="reset" name="Reset" value="Reset">Reset</button>
+</form>
+<br>
+
+<div id="progress-url" class="row" style="display: none;">
+<div class="col-sm-2">
+<div class="progress center-block legend">
+<div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"> Running...
+</div>
+</div>
+</div>
+</div>
+
+<h3>Image Upload</h3>
+<p> You can also upload your own image.</p>
+<form id="upload-image" action="/results" method="post" enctype="multipart/form-data">
+<input type="file" name="coin" accept="image/*"> 
+<button type="submit" name="Submit" value='Submit'>Submit</button>
+<button type="reset" name="Reset" value="Reset">Reset</button>
+</form>
+<br>
+
+<div id="progress-image" class="row" style="display: none;">
+<div class="col-sm-2">
+<div class="progress center-block legend">
+<div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"> Running...
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class="container-fluid">
+<div class="row">
+<div class="col-md-12"> 
+<h3>Examples</h3>
+<p>Below are some example images you can use to test the tool with. Currently, it's able to identify portraits on coins belonging to Emperors Augustus, Tiberius, Nero, Vespasian, Domitian, Trajan, Hadrian, Antoninus Pius, and Marcus Aurelius. For best results, the Aureus and Denarius should be used, but other denominations, like the sestertius, might work as well.</p>
+
+<div class="metadata_section">
+<div class="row">
+<div class="col-md-12 metadata_section">
+<!---->
+<div class="col-md-3 portrait" title="Augustus">
+<div class="image-spacer text-center">
+<img src="/static/examples/Augustus.jpg" alt="Augustus" style="width: 100%; height: 100%; object-fit: contain;">
+</div>
+<div class="text-center name-container"> Augustus
+</div>
+</div>
+<!---->
+<div class="col-md-3 portrait" title="Tiberius">
+<div class="image-spacer text-center">
+<img src="/static/examples/Tiberius.jpg" alt="Tiberius" style="width: 100%; height: 100%; object-fit: contain;">
+</div>
+<div class="text-center name-container"> Tiberius
+</div>
+</div>
+<!---->
+<div class="col-md-3 portrait" title="Nero">
+<div class="image-spacer text-center">
+<img src="/static/examples/Nero.jpg" alt="Nero" style="width: 100%; height: 100%; object-fit: contain;">
+</div>
+<div class="text-center name-container"> Nero
+</div>
+</div>
+<!---->
+<div class="col-md-3 portrait" title="Vespasian">
+<div class="image-spacer text-center">
+<img src="/static/examples/Vespasian.jpg" alt="Vespasian" style="width: 100%; height: 100%; object-fit: contain;">
+</div>
+<div class="text-center name-container"> Vespasian
+</div>
+</div>
+<!---->
+</div>
+</div>
+</div>
+
+<div class="metadata_section">
+<div class="row">
+<div class="col-md-12 metadata_section">
+<!---->
+<div class="col-md-3 portrait" title="Domitian">
+<div class="image-spacer text-center">
+<img src="/static/examples/Domitian.jpg" alt="Domitian" style="width: 100%; height: 100%; object-fit: contain;">
+</div>
+<div class="text-center name-container"> Domitian
+</div>
+</div>
+<!---->
+<div class="col-md-3 portrait" title="Trajan">
+<div class="image-spacer text-center">
+<img src="/static/examples/Trajan.jpg" alt="Trajan" style="width: 100%; height: 100%; object-fit: contain;">
+</div>
+<div class="text-center name-container"> Trajan
+</div>
+</div>
+<!---->
+<div class="col-md-3 portrait" title="Hadrian">
+<div class="image-spacer text-center">
+<img src="/static/examples/Hadrian.jpg" alt="Hadrian" style="width: 100%; height: 100%; object-fit: contain;">
+</div>
+<div class="text-center name-container"> Hadrian
+</div>
+</div>
+<!---->
+<div class="col-md-3 portrait" title="Antoninus Pius">
+<div class="image-spacer text-center">
+<img src="/static/examples/Antoninus_Pius.jpg" alt="Antoninus Pius" style="width: 100%; height: 100%; object-fit: contain;">
+</div>
+<div class="text-center name-container"> Antoninus Pius
+</div>
+</div>
+<!---->
+</div>
+</div>
+</div>
+
+<div class="metadata_section">
+<div class="row">
+<div class="col-md-12 metadata_section">
+<!---->
+<div class="col-md-3 portrait" title="Marcus Aurelius">
+<div class="image-spacer text-center">
+<img src="/static/examples/Marcus_Aurelius.jpg" alt="Marcus Aurelius" style="width: 100%; height: 100%; object-fit: contain;">
+</div>
+<div class="text-center name-container"> Marcus Aurelius
+</div>
+</div>
+<!---->
+</div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<footer class="container-fluid text-center">
+</footer>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+<!-- Bokeh
+=========== -->
+<script type="text/javascript" src="https://cdn.pydata.org/bokeh/release/bokeh-1.0.4.min.js"></script>
+<script type="text/javascript" src="https://cdn.pydata.org/bokeh/release/bokeh-widgets-1.0.4.min.js"></script>
+{{ the_script | safe }}
+
+<script>
+$('#upload-url').submit(function () {
+    showHide_url();
+    document.getElementById("upload-url").submit();
+    //return false; //just to show proper divs are hiding/showing
+});
+function showHide_url() {
+    $('#progress-url').show();
+    $('#upload-url').hide()
+}
+</script>
+
+<script>
+$('#upload-image').submit(function () {
+    showHide_image();
+    document.getElementById("upload-image").submit();
+    //return false; //just to show proper divs are hiding/showing
+});
+function showHide_image() {
+    $('#progress-image').show();
+    $('#upload-image').hide()
+}
+</script>
+
+
+</body>
+</html>
