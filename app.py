@@ -35,7 +35,7 @@ app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 # crop and convert ot grayscale
-def process_image(file, verbose=False):       
+def process_image(file, verbose=False):
     img = cv2.imread(file)
     rows, cols, channels = img.shape
     if verbose: 
@@ -73,10 +73,10 @@ def file_to_localfile(file, verbose=False):
 
 # load Keras models and run predict on the example
 def extract(example, verbose=False):
-    model_insc = load_model('static/models/model_insc.h5')
-    inscription = model_insc.predict(example)[0]
-    if verbose:
-        print('  inscription: {}, type: {}'.format(inscription, type(inscription)))
+    #model_insc = load_model('static/models/model_insc.h5')
+    #inscription = model_insc.predict(example)[0]
+    #if verbose:
+    #    print('  inscription: {}, type: {}'.format(inscription, type(inscription)))
     # load keras portrait model and run predict
     model_port = load_model('static/models/model_port.h5')
     portraits = model_port.predict(example)[0]
@@ -484,7 +484,7 @@ def resultspage():
     emperors, probs = zip(*sorted_results)
 
     # build the dataframe
-    data = get_data('static/data/data.csv', verbose=True)
+    data = get_data('static/data/data.csv')
 
     # build the plot
     plot = make_plot(emperors[0], data)
