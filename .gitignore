@@ -1,6 +1,5 @@
 rev*
 static/data/*
-static/uploads/*
 static/models/model_insc.h5
 templates/rev*
 
