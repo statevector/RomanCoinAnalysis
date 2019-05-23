@@ -5,7 +5,7 @@ This web app is a tool that helps users identify and assess the value of ancient
 The app is developed with Python, Keras for Machine Learning, Flask, HTML/CSS, and Bokeh for visualizations, and deployed on Heroku.
 
 ## Web App URL
-[https://xyz.herokuapp.com/](https://xyz.herokuapp.com/)
+[https://roman-coin-analysis.herokuapp.com/](https://roman-coin-analysis.herokuapp.com/)
 
 ## How It Works
 This web application is designed to help users identify and assess the value of ancient Roman coins. Users can link to or upload an image of a Roman coin, and a machine learning model will process the image and predict which emperor appears on the coin based on the distinct features of the obverse (frontside) portrait. In addition, users are provided with an interactive visualization comprised of past coin auction data that provides a way to assess the value of coins specific to a particular emperor, based on denomination, grade, and other features. The idea is to provide everyone from new collectors to enthusiasts with information to help them learn more about ancient coins and better assess their value.
