@@ -73,18 +73,13 @@ def file_to_localfile(file, verbose=False):
 
 # load Keras models and run predict on the example
 def extract(example, verbose=False):
-    #model_insc = load_model('static/models/model_insc.h5')
-    #inscription = model_insc.predict(example)[0]
-    #if verbose:
-    #    print('  inscription: {}, type: {}'.format(inscription, type(inscription)))
-    # load keras portrait model and run predict
     model_port = load_model('static/models/model_port.h5')
     portraits = model_port.predict(example)[0]
     if verbose:
         print('  portraits: {}, type: {}'.format(portraits, type(portraits)))
     # do this for some reason
     backend.clear_session()
-    return inscription, portraits
+    return portraits
 
 # access the file, convert it to a NumPy array, read it
 # into OpenCV format, and save it as a local image
@@ -472,11 +467,10 @@ def resultspage():
     image = process_image(filename)
     example = create_example(image)
 
-    # run predict
-    inscription, portraits = extract(example)
-    portraits = [round(p*100,2) for p in portraits] # convert to %
+    # run predict and convert results to percentages
+    portraits = extract(example)
+    portraits = [round(p*100,2) for p in portraits]
 
-    # get results
     emperors = ['Augustus', 'Tiberius', 'Nero', 'Vespasian', 'Domitian', 
                 'Trajan', 'Hadrian', 'Antoninus Pius', 'Marcus Aurelius']
     results = dict(zip(emperors, portraits))
