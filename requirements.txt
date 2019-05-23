@@ -16,8 +16,9 @@ Quandl==3.4.6
 requests==2.20.0
 six==1.12.0
 tornado==6.0.1
-opencv-python==4.0.0.21
+opencv-python-headless-4.1.0.25
 urllib3==1.24.1
 Keras==2.2.4
 Keras-Applications==1.0.7
 Keras-Preprocessing==1.0.9
+
