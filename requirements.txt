@@ -9,7 +9,7 @@ jsonschema==3.0.1
 numpy==1.16.2
 packaging==19.0
 pandas==0.24.1
-Pillow==5.4.1
+Pillow==9.0.1
 python-dateutil==2.8.0
 PyYAML==5.1
 Quandl==3.4.6
